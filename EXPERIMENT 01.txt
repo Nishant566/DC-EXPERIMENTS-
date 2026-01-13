@@ -240,26 +240,34 @@ disp(decod);
 
 EXPERIMENT 06
 Hamming coding
-% Hamming Encoding  
-data = [1 0 1 0]
-p1 = mod(data(1) + data(3) + data(4), 2); 
-p2 = mod(data(1) + data(2) + data(4), 2); 
-p3 = mod(data(1) + data(2) + data(3), 2); 
-encoded_data = [p1 p2 data(1) p3 data(2) data(3) data(4)]; 
-disp('Encoded Data:'); 
-disp(encoded_data);  
-encoded_data = [1 0 1 0 1 0 1]; 
-s1 = mod(encoded_data(1) + encoded_data(3) + encoded_data(5) + encoded_data(7), 2)
-s2 = mod(encoded_data(2) + encoded_data(3) + encoded_data(6) + encoded_data(7), 2)
-s3 = mod(encoded_data(4) + encoded_data(5) + encoded_data(6) + encoded_data(7), 2)
-error_location = bin2dec([num2str(s1) num2str(s2) num2str(s3)]);  
-if error_location ~= 0 
-encoded_data(error_location) = mod(encoded_data(error_location) + 1, 2); 
-end  
-decoded_data = encoded_data([3 5 6 7]); 
-disp('Decoded Data:'); 
+data = [1 0 1 0];
+p1 = mod(data(1) + data(2) + data(4), 2);
+p2 = mod(data(1) + data(3) + data(4), 2);
+p3 = mod(data(2) + data(3) + data(4), 2);
+encoded_data = [p1 p2 data(1) p3 data(2) data(3) data(4)];
+disp('Encoded Data: ');
+disp(encoded_data)
+received_data = input('enter received data in []: ');
+disp(received_data)
+s1 = mod(received_data(1) + received_data(3) + received_data(5) + received_data(7), 2);
+s2 = mod(received_data(2) + received_data(3) + received_data(6) + received_data(7), 2);
+s3 = mod(received_data(4) + received_data(5) + received_data(6) + received_data(7), 2);
+error_location = bin2dec([num2str(s3) num2str(s2) num2str(s1)]);
+if error_location ~= 0
+    received_data(error_location) = mod(received_data(error_location) + 1, 2);
+    fprintf('Bit error corrected at position %d.', error_location)
+else
+    fprintf('No error detected')
+end
+disp('s1')
+disp(s1)
+disp('s2')
+disp(s2)
+disp('s3')
+disp(s3)
+decoded_data = received_data([3 5 6 7]);
+disp('Decoded Data: ');
 disp(decoded_data);
-
 
 
 
@@ -285,4 +293,5 @@ disp('Noisy Encoded Message (with bit flip):');
 disp(encoded_msg_noisy); 
 disp('Decoded Message:'); 
 disp(decoded_msg);
+
 
