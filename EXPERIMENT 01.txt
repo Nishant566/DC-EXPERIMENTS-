@@ -204,6 +204,10 @@ title('16 QAM constellation with noise')
 grid on;
 axis equal;
 axis([-4 4 -4 4]);
+
+
+
+
 EXPERIMENT 05
 Huffman coding 
 clc; 
@@ -281,3 +285,4 @@ disp('Noisy Encoded Message (with bit flip):');
 disp(encoded_msg_noisy); 
 disp('Decoded Message:'); 
 disp(decoded_msg);
+
